@@ -5,12 +5,12 @@ const twitterButton = document.getElementById("twitter");
 const newQuoteButton = document.getElementById("new-quote");
 const loader = document.getElementById("loader");
 
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false;
   quoteContainer.hidden = true;
 }
 
-function complete() {
+function removeLoadingSpinner() {
   if (!loader.hidden) {
     quoteContainer.hidden = false;
     loader.hidden = true;
@@ -19,7 +19,7 @@ function complete() {
 
 // GET Quotes from API ==>
 async function getQuotes() {
-  loading();
+  showLoadingSpinner();
   const apiUrl = "https://type.fit/api/quotes";
   try {
     const response = await fetch(apiUrl);
@@ -49,7 +49,7 @@ newQuote = () => {
   } else {
     quoteText.classList.remove("long-quote");
   }
-  complete();
+  removeLoadingSpinner();
 };
 
 function tweetQuote() {
